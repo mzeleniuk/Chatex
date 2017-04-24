@@ -18,7 +18,7 @@ module.exports = {
     extensions: ['.ts', '.js', '.json'],
     modules: [path.resolve('node_modules')],
       alias: {
-        api': path.resolve(__dirname, 'api/server')
+        'api': path.resolve(__dirname, 'api/server')
       }
   },
 
