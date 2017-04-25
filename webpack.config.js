@@ -9,7 +9,7 @@ module.exports = {
     path: '{{BUILD}}',
     publicPath: 'build/',
     filename: process.env.IONIC_OUTPUT_JS_FILE_NAME,
-    devtoolModuleFilenameTemplate: ionicWebpackFactory.getSourceMapperFunction(),
+    devtoolModuleFilenameTemplate: ionicWebpackFactory.getSourceMapperFunction()
   },
 
   devtool: process.env.IONIC_SOURCE_MAP_TYPE,
@@ -17,9 +17,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     modules: [path.resolve('node_modules')],
-      alias: {
-        'api': path.resolve(__dirname, 'api/server')
-      }
+    alias: {
+      'api': path.resolve(__dirname, 'api/server')
+    }
   },
 
   externals: [
