@@ -68,4 +68,16 @@ export class ChatsPage {
       }
     ]);
   }
+
+  removeChat(chat:Chat):void {
+    this.chats = this.chats.map(chatsArray => {
+      const chatIndex = chatsArray.indexOf(chat);
+
+      if (chatIndex != -1) {
+        chatsArray.splice(chatIndex, 1);
+      }
+
+      return chatsArray;
+    });
+  }
 }
