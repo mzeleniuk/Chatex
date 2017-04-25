@@ -30,7 +30,7 @@
               {{chat.lastMessage.content}}
             </p>
 
-            <span class="last-message-timestamp">{{chat.lastMessage.createdAt }}</span>
+            <span class="last-message-timestamp">{{chat.lastMessage.createdAt | amCalendar}}</span>
           </span>
         </div>
       </button>
