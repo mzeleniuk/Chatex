@@ -11,6 +11,8 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
+    "isolatedModules": false,
+    "removeComments": false,
     "paths": {
       "api/*": [
         "./api/server/*"

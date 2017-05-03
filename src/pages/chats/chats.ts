@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Chats, Messages } from 'api/collections';
-import { Chat } from 'api/models';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Chats, Messages} from 'api/collections';
+import {Chat} from 'api/models';
+import {NavController} from 'ionic-angular';
+import {Observable} from 'rxjs';
+import {MessagesPage} from '../messages/messages';
 
 @Component({
   templateUrl: 'chats.html'
@@ -10,14 +12,14 @@ import { Observable } from 'rxjs';
 export class ChatsPage implements OnInit {
   chats;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {
     this.chats = Chats
       .find({})
-      .mergeMap((chats:Chat[]) =>
+      .mergeMap((chats: Chat[]) =>
         Observable.combineLatest(
-          ...chats.map((chat:Chat) =>
+          ...chats.map((chat: Chat) =>
             Messages
               .find({chatId: chat._id})
               .startWith(null)
@@ -31,7 +33,11 @@ export class ChatsPage implements OnInit {
       ).zone();
   }
 
-  removeChat(chat:Chat):void {
+  showMessages(chat): void {
+    this.navCtrl.push(MessagesPage, {chat});
+  }
+
+  removeChat(chat: Chat): void {
     Chats.remove({_id: chat._id}).subscribe(() => {});
   }
 }
