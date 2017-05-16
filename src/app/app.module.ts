@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MomentModule} from 'angular2-moment';
 import {PhoneService} from '../services/phone';
+import {LoginPage} from '../pages/login/login';
 import {MyApp} from './app.component';
 
 import {ChatsPage} from '../pages/chats/chats';
@@ -15,7 +16,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
