@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Alert, AlertController, NavController} from 'ionic-angular';
 import {PhoneService} from '../../services/phone';
+import {VerificationPage} from '../verification/verification';
 
 @Component({
   selector: 'login',
@@ -46,9 +47,15 @@ export class LoginPage {
   handleLogin(alert: Alert): void {
     alert.dismiss().then(() => {
       return this.phoneService.verify(this.phone);
-    }).catch((e) => {
-      this.handleError(e);
-    });
+    })
+      .then(() => {
+        this.navCtrl.push(VerificationPage, {
+          phone: this.phone
+        });
+      })
+      .catch((e) => {
+        this.handleError(e);
+      });
   }
 
   handleError(e: Error): void {

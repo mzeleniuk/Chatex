@@ -4,6 +4,7 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MomentModule} from 'angular2-moment';
 import {PhoneService} from '../services/phone';
 import {LoginPage} from '../pages/login/login';
+import {VerificationPage} from '../pages/verification/verification';
 import {MyApp} from './app.component';
 
 import {ChatsPage} from '../pages/chats/chats';
@@ -17,7 +18,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     MyApp,
     ChatsPage,
     MessagesPage,
-    LoginPage
+    LoginPage,
+    VerificationPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     MyApp,
     ChatsPage,
     MessagesPage,
-    LoginPage
+    LoginPage,
+    VerificationPage
   ],
   providers: [
     StatusBar,
