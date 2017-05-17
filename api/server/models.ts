@@ -25,3 +25,7 @@ export interface Message {
   ownership?: string;
   type?: MessageType;
 }
+
+export interface User extends Meteor.User {
+  profile?: Profile;
+}
