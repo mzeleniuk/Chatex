@@ -12,6 +12,7 @@ import {ChatsPage} from '../pages/chats/chats';
 import {NewChatComponent} from '../pages/chats/new-chat';
 import {ChatsOptionsComponent} from '../pages/chats/chats-options';
 import {MessagesPage} from '../pages/messages/messages';
+import {MessagesOptionsComponent} from '../pages/messages/messages-options';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     VerificationPage,
     ProfilePage,
     ChatsOptionsComponent,
-    NewChatComponent
+    NewChatComponent,
+    MessagesOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     VerificationPage,
     ProfilePage,
     ChatsOptionsComponent,
-    NewChatComponent
+    NewChatComponent,
+    MessagesOptionsComponent
   ],
   providers: [
     StatusBar,

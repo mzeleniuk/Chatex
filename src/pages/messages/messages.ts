@@ -1,11 +1,12 @@
 import {Component, OnInit, OnDestroy, ElementRef} from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavParams, PopoverController} from 'ionic-angular';
 import {Chat, Message, MessageType} from 'api/models';
 import {Observable} from 'rxjs';
 import {Messages} from 'api/collections';
 import {MeteorObservable} from 'meteor-rxjs';
 import * as moment from 'moment';
 import {_} from 'meteor/underscore';
+import {MessagesOptionsComponent} from './messages-options';
 
 @Component({
   selector: 'messages-page',
@@ -23,7 +24,9 @@ export class MessagesPage implements OnInit, OnDestroy {
   messagesDayGroups;
   senderId: string;
 
-  constructor(navParams: NavParams, private el: ElementRef) {
+  constructor(navParams: NavParams,
+              private el: ElementRef,
+              private popoverCtrl: PopoverController) {
     this.selectedChat = <Chat>navParams.get('chat');
     this.title = this.selectedChat.title;
     this.picture = this.selectedChat.picture;
@@ -68,6 +71,16 @@ export class MessagesPage implements OnInit, OnDestroy {
   subscribeMessages() {
     this.scrollOffset = this.scroller.scrollHeight;
     this.messagesDayGroups = this.findMessagesDayGroups();
+  }
+
+  showOptions(): void {
+    const popover = this.popoverCtrl.create(MessagesOptionsComponent, {
+      chat: this.selectedChat
+    }, {
+      cssClass: 'options-popover messages-options-popover'
+    });
+
+    popover.present();
   }
 
   findMessagesDayGroups() {
