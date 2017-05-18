@@ -15,7 +15,8 @@ Meteor.publish('users', function (): Mongo.Cursor<User> {
   });
 });
 
-Meteor.publish('messages', function (chatId: string): Mongo.Cursor<Message> {
+Meteor.publish('messages', function (chatId: string,
+                                     messagesBatchCounter: number): Mongo.Cursor<Message> {
   if (!this.userId || !chatId) {
     return;
   }
@@ -23,7 +24,8 @@ Meteor.publish('messages', function (chatId: string): Mongo.Cursor<Message> {
   return Messages.collection.find({
     chatId
   }, {
-    sort: {createdAt: -1}
+    sort: {createdAt: -1},
+    limit: 30 * messagesBatchCounter
   });
 });
 
