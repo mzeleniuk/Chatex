@@ -7,6 +7,7 @@ import {MeteorObservable} from 'meteor-rxjs';
 import * as moment from 'moment';
 import {_} from 'meteor/underscore';
 import {MessagesOptionsComponent} from './messages-options';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'messages-page',
@@ -23,6 +24,8 @@ export class MessagesPage implements OnInit, OnDestroy {
   scrollOffset = 0;
   messagesDayGroups;
   senderId: string;
+  loadingMessages: boolean;
+  messagesComputation: Subscription;
 
   constructor(navParams: NavParams,
               private el: ElementRef,
@@ -68,9 +71,33 @@ export class MessagesPage implements OnInit, OnDestroy {
     this.autoScroller.disconnect();
   }
 
-  subscribeMessages() {
+  // Subscribes to the relevant set of messages
+  subscribeMessages(): void {
+    // A flag which indicates if there's a subscription in process
+    this.loadingMessages = true;
+
+    // A custom offset to be used to re-adjust the scrolling position once
+    // new dataset is fetched
     this.scrollOffset = this.scroller.scrollHeight;
-    this.messagesDayGroups = this.findMessagesDayGroups();
+
+    MeteorObservable.subscribe('messages',
+      this.selectedChat._id
+    ).subscribe(() => {
+      // Keep tracking changes in the dataset and re-render the view
+      if (!this.messagesComputation) {
+        this.messagesComputation = this.autorunMessages();
+      }
+
+      // Allow incoming subscription requests
+      this.loadingMessages = false;
+    });
+  }
+
+  // Detects changes in the messages dataset and re-renders the view
+  autorunMessages(): Subscription {
+    return MeteorObservable.autorun().subscribe(() => {
+      this.messagesDayGroups = this.findMessagesDayGroups();
+    });
   }
 
   showOptions(): void {
@@ -129,6 +156,11 @@ export class MessagesPage implements OnInit, OnDestroy {
   }
 
   scrollDown(): void {
+    // Don't scroll down if messages subscription is being loaded
+    if (this.loadingMessages) {
+      return;
+    }
+
     // Scroll down and apply specified offset
     this.scroller.scrollTop = this.scroller.scrollHeight - this.scrollOffset;
 
