@@ -26,6 +26,14 @@
             {{message.content}}
           </div>
 
+          <div *ngIf="message.type == 'location'" class="message-content message-content-text">
+            <sebm-google-map [zoom]="getLocation(message.content).zoom" [latitude]="getLocation(message.content).lat"
+                             [longitude]="getLocation(message.content).lng">
+              <sebm-google-map-marker [latitude]="getLocation(message.content).lat"
+                                      [longitude]="getLocation(message.content).lng"></sebm-google-map-marker>
+            </sebm-google-map>
+          </div>
+
           <span class="message-timestamp">{{message.createdAt | amDateFormat: 'HH:mm'}}</span>
         </div>
       </div>
