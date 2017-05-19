@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {_} from 'meteor/underscore';
 import {MessagesOptionsComponent} from './messages-options';
 import {Subscription, Observable, Subscriber} from 'rxjs';
+import {MessagesAttachmentsComponent} from './messages-attachments';
 
 @Component({
   selector: 'messages-page',
@@ -231,5 +232,19 @@ export class MessagesPage implements OnInit, OnDestroy {
     ).zone().subscribe(() => {
       this.message = ''; // Zero the input field
     });
+  }
+
+  showAttachments(): void {
+    const popover = this.popoverCtrl.create(MessagesAttachmentsComponent, {
+      chat: this.selectedChat
+    }, {
+      cssClass: 'attachments-popover'
+    });
+
+    popover.onDidDismiss((params) => {
+      // TODO: Handle result
+    });
+
+    popover.present();
   }
 }

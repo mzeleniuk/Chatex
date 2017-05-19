@@ -1,4 +1,5 @@
 import {NgModule, ErrorHandler} from '@angular/core';
+import {AgmCoreModule} from 'angular2-google-maps/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MomentModule} from 'angular2-moment';
@@ -13,6 +14,7 @@ import {NewChatComponent} from '../pages/chats/new-chat';
 import {ChatsOptionsComponent} from '../pages/chats/chats-options';
 import {MessagesPage} from '../pages/messages/messages';
 import {MessagesOptionsComponent} from '../pages/messages/messages-options';
+import {MessagesAttachmentsComponent} from '../pages/messages/messages-attachments';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -27,11 +29,15 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     ProfilePage,
     ChatsOptionsComponent,
     NewChatComponent,
-    MessagesOptionsComponent
+    MessagesOptionsComponent,
+    MessagesAttachmentsComponent
   ],
   imports: [
     BrowserModule,
     MomentModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWoBdZHCNh5R-hB5S5ZZ2oeoYyfdDgniA'
+    }),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -44,7 +50,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     ProfilePage,
     ChatsOptionsComponent,
     NewChatComponent,
-    MessagesOptionsComponent
+    MessagesOptionsComponent,
+    MessagesAttachmentsComponent
   ],
   providers: [
     StatusBar,
