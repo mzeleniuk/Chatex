@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ElementRef} from '@angular/core';
 import {NavParams, PopoverController} from 'ionic-angular';
-import {Chat, Message, MessageType} from 'api/models';
+import {Chat, Message, MessageType, Location} from 'api/models';
 import {Messages} from 'api/collections';
 import {MeteorObservable} from 'meteor-rxjs';
 import * as moment from 'moment';
@@ -234,6 +234,15 @@ export class MessagesPage implements OnInit, OnDestroy {
     });
   }
 
+  sendLocationMessage(location: Location): void {
+    MeteorObservable.call('addMessage', MessageType.LOCATION,
+      this.selectedChat._id,
+      `${location.lat},${location.lng},${location.zoom}`
+    ).zone().subscribe(() => {
+      this.message = ''; // Zero the input field
+    });
+  }
+
   showAttachments(): void {
     const popover = this.popoverCtrl.create(MessagesAttachmentsComponent, {
       chat: this.selectedChat
@@ -242,7 +251,13 @@ export class MessagesPage implements OnInit, OnDestroy {
     });
 
     popover.onDidDismiss((params) => {
-      // TODO: Handle result
+      if (params) {
+        if (params.messageType === MessageType.LOCATION) {
+          const location = params.selectedLocation;
+
+          this.sendLocationMessage(location);
+        }
+      }
     });
 
     popover.present();
