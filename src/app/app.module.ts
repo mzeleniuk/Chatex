@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MomentModule} from 'angular2-moment';
 import {PhoneService} from '../services/phone';
+import {PictureService} from '../services/picture';
 import {LoginPage} from '../pages/login/login';
 import {VerificationPage} from '../pages/verification/verification';
 import {ProfilePage} from '../pages/profile/profile';
@@ -60,7 +61,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PhoneService
+    PhoneService,
+    PictureService
   ]
 })
 
