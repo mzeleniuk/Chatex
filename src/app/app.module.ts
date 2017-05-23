@@ -17,6 +17,7 @@ import {MessagesPage} from '../pages/messages/messages';
 import {MessagesOptionsComponent} from '../pages/messages/messages-options';
 import {MessagesAttachmentsComponent} from '../pages/messages/messages-attachments';
 import {NewLocationMessageComponent} from '../pages/messages/location-message';
+import {ShowPictureComponent} from '../pages/messages/show-picture';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -33,7 +34,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     NewChatComponent,
     MessagesOptionsComponent,
     MessagesAttachmentsComponent,
-    NewLocationMessageComponent
+    NewLocationMessageComponent,
+    ShowPictureComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     NewChatComponent,
     MessagesOptionsComponent,
     MessagesAttachmentsComponent,
-    NewLocationMessageComponent
+    NewLocationMessageComponent,
+    ShowPictureComponent
   ],
   providers: [
     StatusBar,

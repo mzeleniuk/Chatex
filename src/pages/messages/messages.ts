@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ElementRef} from '@angular/core';
-import {NavParams, PopoverController} from 'ionic-angular';
+import {NavParams, PopoverController, ModalController} from 'ionic-angular';
 import {Chat, Message, MessageType, Location} from 'api/models';
 import {Messages} from 'api/collections';
 import {MeteorObservable} from 'meteor-rxjs';
@@ -9,6 +9,7 @@ import {MessagesOptionsComponent} from './messages-options';
 import {Subscription, Observable, Subscriber} from 'rxjs';
 import {MessagesAttachmentsComponent} from './messages-attachments';
 import {PictureService} from '../../services/picture';
+import {ShowPictureComponent} from './show-picture';
 
 @Component({
   selector: 'messages-page',
@@ -32,7 +33,8 @@ export class MessagesPage implements OnInit, OnDestroy {
   constructor(navParams: NavParams,
               private el: ElementRef,
               private popoverCtrl: PopoverController,
-              private pictureService: PictureService) {
+              private pictureService: PictureService,
+              private modalCtrl: ModalController) {
     this.selectedChat = <Chat>navParams.get('chat');
     this.title = this.selectedChat.title;
     this.picture = this.selectedChat.picture;
@@ -287,5 +289,13 @@ export class MessagesPage implements OnInit, OnDestroy {
       lng: splitted[1],
       zoom: Math.min(splitted[2] || 0, 19)
     };
+  }
+
+  showPicture({target}: Event) {
+    const modal = this.modalCtrl.create(ShowPictureComponent, {
+      pictureSrc: (<HTMLImageElement>target).src
+    });
+
+    modal.present();
   }
 }

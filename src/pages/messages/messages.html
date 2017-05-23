@@ -34,6 +34,9 @@
             </sebm-google-map>
           </div>
 
+          <img *ngIf="message.type == 'picture'" (click)="showPicture($event)" [src]="message.content"
+               class="message-content message-content-picture">
+
           <span class="message-timestamp">{{message.createdAt | amDateFormat: 'HH:mm'}}</span>
         </div>
       </div>
